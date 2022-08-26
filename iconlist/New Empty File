@@ -1,0 +1,17 @@
+
+{    
+    "Beef"             ?        <MaterialCommunityIcons name="cow" size={24} color="black" /> :
+    "Breakfast"        ?        <MaterialIcons name="free-breakfast" size={24} color="black" /> :
+    "Chicken"          ?         <MaterialCommunityIcons name="food-turkey" size={24} color="black" /> :
+    "Dessert"          ?         <MaterialCommunityIcons name="cupcake" size={24} color="black" /> :
+    "Goat"             ?        <MaterialIcons name="goat" size={24} color="black" /> :
+    "Lamb"             ?         <MaterialCommunityIcons name="sheep" size={24} color="black" /> :
+    "Miscellaneous"    ?         <MaterialIcons name="icecream" size={24} color="black" /> :
+     "Pasta"           ?        <MaterialCommunityIcons name="noodles" size={24} color="black" /> :
+     "Pork"            ?        <MaterialCommunityIcons name="pig" size={24} color="black" /> :
+    "Seafood"          ?        <MaterialCommunityIcons name="fish" size={24} color="black" /> :
+    "Side"             ?        <MaterialCommunityIcons name="silverware-spoon" size={24} color="black" /> :
+    "Starter"          ?        <MaterialCommunityIcons name="toaster" size={24} color="black" /> :
+    "Vegan"            ?         <MaterialCommunityIcons name="cow-off" size={24} color="black" /> :
+   "Vegetarian"        ?        <MaterialCommunityIcons name="corn" size={24} color="black" /> 
+}
