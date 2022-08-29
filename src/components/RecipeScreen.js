@@ -43,8 +43,13 @@ return(
 
 <View style={{backgroundColor:'black'}}>
 
+<FlatList 
+data = {instructions}
+keyExtractor={(item,index)=> index.toString()}
+renderItem={ ({item}) => <> <RecipeCard style={{position:'relative'}} data={item} ingredients={ingredients}/>   </>      }
 
-{instructions && instructions.map((item,index) => <RecipeCard key={index} style={{position:'relative'}} data={item} ingredients={ingredients}/> )}
+/>
+
 </View>
 
 

@@ -35,8 +35,8 @@ return(
  
 
 <View style={{flex:'1', flexDirection:'column'}}>
-{menuOpen==='ingredient' ? <View style={{padding:'20px', flexDirection:'column', justifyContent:'center', alignItems:'flex-start', textAlign:'left' }}> {ingredients.map((item,index) => <IngredientCard isIngredient={true} key={index} data={item}/>)} </View>:
-menuOpen==='recipe' ? <View style={{padding:'20px', flexDirection:'column', justifyContent:'center', alignItems:'center' }}> {<IngredientCard key={1} isIngredient={false} data={data.strInstructions}/>} </View>
+{menuOpen==='ingredient' ? <View style={{padding:'20px', backgroundColor:'#1db954', flexDirection:'column', justifyContent:'center', alignItems:'flex-start', textAlign:'left' }}> <>{ingredients.map((item,index) => <IngredientCard isIngredient={true} key={index} data={item}/>)}</> </View>:
+menuOpen==='recipe' ? <View style={{padding:'20px', backgroundColor:'#1db954', flexDirection:'column', justifyContent:'center', alignItems:'center' }}> <IngredientCard key={1} isIngredient={false} data={data.strInstructions}/>  </View>
 :null
 
 }
@@ -58,9 +58,9 @@ menuOpen==='recipe' ? <View style={{padding:'20px', flexDirection:'column', just
 const styles = StyleSheet.create({
 
     pageWrapper: {flex:'1',
-    width:'80vw',
+    width:'100vw',
     height:'100vh',
-    maxWidth: '450px',
+    maxWidth: '500px',
     justifyContent:'center',
     alignItems:'center'},
     
