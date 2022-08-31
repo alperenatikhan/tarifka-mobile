@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView,ScrollView,Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Text, View, TouchableOpacity,Image } from 'react-native';
+
 
 
 

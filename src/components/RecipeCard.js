@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView,ScrollView,Image, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, SafeAreaView,ScrollView,Image, ImageBackground} from 'react-native';
 import * as WebBrowser from 'expo-web-browser'
 import React, {useState,useEffect} from 'react';
 import IngredientCard from './IngredientCard'
@@ -10,45 +10,50 @@ export default function RecipeCard({data, ingredients}) {
 const [menuOpen,setMenuOpen]= useState(false)
 let [result,setResult] = useState(null)
 
-const handlePressButtonAsync = async (url) => {
+const handlePressButtonAsync = async(url) => {
     let result = await WebBrowser.openBrowserAsync(url)
     setResult(result)
 }
 
-return(
-<View style={styles.pageWrapper}>
 
+function handleMenu(param){
 
+menuOpen != param ? setMenuOpen(param): setMenuOpen(false)
 
-
-<View style={{backgroundColor:'#1db954',flex:'1', width:'90vw', minWidth:'250px', maxWidth:'500px'}}>
-<Image source={{uri:data.strMealThumb}} style={{width:'100%', height:'250px' }}   />
-
-
-<View style={{flex:'1', flexWrap:'wrap', gap: '15px',flexDirection:'row',marginLeft:'30px', marginBottom:'14px', marginTop:'18px', justifyContent:'space-around'}}>
-<TouchableOpacity style = {globalStyles.buttonDesign} onPress={()=> setMenuOpen(menuOpen == false ? 'ingredient': menuOpen =='ingredient'? false: 'ingredient')}><Text style={globalStyles.midButton}> Ingredients  </Text></TouchableOpacity>
-
-<TouchableOpacity style = {globalStyles.buttonDesign} onPress={()=> setMenuOpen( menuOpen == false ? 'recipe': menuOpen =='recipe'? false: 'recipe')}><Text style={globalStyles.midButton}> Recipe  </Text></TouchableOpacity>
-<TouchableOpacity onPress={()=> handlePressButtonAsync(data.strYoutube)}><Text style={styles.youtubeButton}> Watch in Youtube  </Text></TouchableOpacity> 
-</View>
-
- 
-
-<View style={{flex:'1', flexDirection:'column'}}>
-{menuOpen==='ingredient' ? <View style={{padding:'20px', backgroundColor:'#1db954', flexDirection:'column', justifyContent:'center', alignItems:'flex-start', textAlign:'left' }}> <>{ingredients.map((item,index) => <IngredientCard isIngredient={true} key={index} data={item}/>)}</> </View>:
-menuOpen==='recipe' ? <View style={{padding:'20px', backgroundColor:'#1db954', flexDirection:'column', justifyContent:'center', alignItems:'center' }}> <IngredientCard key={1} isIngredient={false} data={data.strInstructions}/>  </View>
-:null
 
 }
 
 
+ 
+const renderIngredientCard=({item}) => {
+
+return(
+<IngredientCard isIngredient={true} data={item}/>
+)
+
+}
+
+
+return(
+<View style={styles.pageWrapper}>
+
+    <View style={{backgroundColor:'#1db954',flex:'1', width:'90vw', minWidth:'250px', maxWidth:'500px'}}>
+        <Image source={{uri:data.strMealThumb}} style={{width:'100%', height:'250px' }}   />
+
+<View style={{flexDirection:'row', marginTop:'10px', gap:'20px', justifyContent:'space-around', flexWrap:'wrap', paddingBottom:'20px'}}>
+<TouchableOpacity style = {globalStyles.buttonDesign} onPress={()=> handleMenu('ingredient')} ><Text style={globalStyles.midButton}> Ingredients  </Text></TouchableOpacity>
+<TouchableOpacity style = {globalStyles.buttonDesign} onPress={()=> handleMenu('recipe')}><Text style={globalStyles.midButton}> Recipe  </Text></TouchableOpacity>
+<TouchableOpacity onPress={()=> handlePressButtonAsync(data.strYoutube)}><Text style={styles.youtubeButton}> Watch in Youtube  </Text></TouchableOpacity> 
 </View>
 
+
+{menuOpen=='ingredient' ? <View style={styles.cardBackground}> {!!ingredients?.length ? <FlatList data={ingredients} renderItem={renderIngredientCard} keyExtractor= {(item,index)=> index.toString()} /> :null } </View>:
+menuOpen=='recipe' ? <View style={styles.cardBackground}> <IngredientCard key={1} isIngredient={false} data={data?.strInstructions}/>  </View>
+:null
+}
+
+
 </View>
-
-
-
-
 
 </View>
 )
@@ -76,7 +81,8 @@ const styles = StyleSheet.create({
          alignItems:'center', 
          textAlign:'center',
          fontWeight:'bold'
-    } 
+    } ,
+cardBackground:{padding:'30px', backgroundColor:'#1db954', flexDirection:'column', justifyContent:'center', alignItems:'flex-start', textAlign:'left' }
 
 
 

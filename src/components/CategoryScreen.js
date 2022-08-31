@@ -3,15 +3,32 @@ import { StyleSheet, Text,FlatList, View, TouchableOpacity, SafeAreaView,ScrollV
 import React, {useState,useEffect} from 'react';
 import axios from 'axios'
 import GiveIcons from './GiveIcons.js'
-import CategoryCard from './CategoryCard.js'
-
-
-
 
 
 export default function CategoryScreen({navigation}) {
 
-const [data,setData] = useState([])
+
+let [data, setData] = useState([])
+
+
+  let renderCategoryItem =  ({item})=>{
+
+if(item?.strCategory=='Goat'){
+return(null)
+
+}else{
+
+    return(
+  <TouchableOpacity style={{border: '1px solid #1ed760',width:'120px', flexDirection:'column',
+   height:'100px',alignItems:'center',justifyContent:'center', marginBottom:'12px', 
+   marginLeft:'6px',borderRadius:'14px'}} 
+   onPress = {()=> navigation.navigate('Meals', {title: item.strCategory} )}>  
+   <GiveIcons category={item.strCategory}/>
+    <Text style={styles.categoryText}>{item.strCategory}</Text> 
+    </TouchableOpacity> 
+    )}
+  }
+
 
 let fetchData=async()=> {
 
@@ -24,21 +41,12 @@ let outprint =await console.log(resp)
 
 useEffect(()=> {fetchData() }  ,[])
 
-let renderCategoryItem = ({item}) => {
-  <TouchableOpacity style={{ border: '1px solid #1ed760',width:'120px', flexDirection:'column', height:'100px',alignItems:'center',justifyContent:'center', marginBottom:'12px', marginLeft:'6px',borderRadius:'14px'}} onPress = {()=> navigation.navigate('Meals', {title: item.strCategory} )}> <View style={{flexDirection:'column',alignItems:'center', justifyContent:'center'}}> <GiveIcons category={item.strCategory}/> <Text style={styles.categoryText}>{item.strCategory} </Text> </View></TouchableOpacity>
-
-}
-
-
   return (
-<>
+
     <SafeAreaView style={styles.pageWrapper}>
-      <Text>Home Screen</Text>
+     
       <ScrollView style={{flex:'1', margin:'5%'}}>
-
-
-            <View style={{flexDirection:'row', flexWrap:'wrap', overflowX:'hidden'}}>
-
+{!!data?.length ?
 <FlatList    
 data={data}
 keyExtractor ={(item,index) => index.toString()}
@@ -46,17 +54,12 @@ contentContainerStyle={{alignItems:'center',
  justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap'}}
-renderItem ={ ({item})=>
-(<> <TouchableOpacity style={{border: '1px solid #1ed760',width:'120px', flexDirection:'column', height:'100px',alignItems:'center',justifyContent:'center', marginBottom:'12px', marginLeft:'6px',borderRadius:'14px'}} onPress = {()=> navigation.navigate('Meals', {title: item.strCategory} )}> <View style={{flexDirection:'column',alignItems:'center', justifyContent:'center'}}> <GiveIcons category={item.strCategory}/> <Text style={styles.categoryText}>{item.strCategory} </Text> </View></TouchableOpacity> </>)
+renderItem ={ renderCategoryItem}
+/>:
+null
 }
-/>
-
- </View>
-
-
 </ScrollView>
     </SafeAreaView>
-</>
   );
 }
 
