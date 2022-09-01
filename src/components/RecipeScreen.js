@@ -32,7 +32,7 @@ let printout= await setIngredients(resp.ingredientString)
 let renderRecipeCard = ({item}) =>  {
 
 return(
-<View> <RecipeCard style={{position:'relative'}} data={item} ingredients={ingredients}/>  </View>
+<RecipeCard style={{position:'relative'}} data={item} ingredients={ingredients}/> 
 )
 } 
 
@@ -46,18 +46,13 @@ return(
 <View style={{flex:'1', justifyContent:'center', alignItems:'center',backgroundColor:'#191414'}}>
     <Text style={{width:'90vw',minWidth: '250px', maxWidth:'500px', fontSize:'18px',textAlign:'center', backgroundColor:'rgba(245, 245, 245, 0.9)', position:'absolute', zIndex:'5', top:'0',padding:'5px', backdropFilter: 'grayscale(90%)', backdropFilter: 'saturate(60%)'  }}> 
     {name} </Text>
-{
 
-!!instructions?.length ?
-<View>
 <FlatList 
 data = {instructions}
 keyExtractor={(item,index)=> index.toString()}
 renderItem={ renderRecipeCard }
 />
-</View>
-: null
-}
+
 
 </View>
 

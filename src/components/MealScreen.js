@@ -55,14 +55,13 @@ useEffect(() => {fillPaginationArray(pageCount)},[pageCount])
 
 let renderMealItem = ({item}) => {
 
-if(!!meals?.length){
+
    return (
    
-   <TouchableOpacity style={styles.mealButton} onPress={()=> navigation.navigate('Recipe',{id: item.idMeal, name: item.strMeal})}>
-         <Image source={{uri:item.strMealThumb}} style={styles.mealPhoto} />
-          <Text style={styles.mealText}> {item.strMeal} </Text> 
+   <TouchableOpacity style={styles.mealButton} onPress={()=> navigation.navigate('Recipe',{id: item?.idMeal, name: item?.strMeal})}>
+         <Image source={{uri:item?.strMealThumb}} style={styles.mealPhoto} />
+          <Text style={styles.mealText}> {item?.strMeal} </Text> 
      </TouchableOpacity>)
-}
 
 } 
 
@@ -87,9 +86,9 @@ return(
 
       <Text style={styles.mealText}> Selected Category : <Text style={{color:'orangered', backgroundColor:'whitesmoke',margin:'5px', padding:5}}>{title}</Text></Text>
 
-{!!meals?.length ? <View> <Text style={{color:'whitesmoke'}}> {mealCount} recipes are waiting for you! </Text> </View>: null}
+{!!mealCount ? (<Text style={{color:'whitesmoke'}}> {mealCount} recipes are waiting for you! </Text>) : null}
 
-{!!meals?.length ? <View> <Text style={{color:'whitesmoke'}}> in {pageCount} pages </Text></View> : null }
+{!!pageCount ? (<Text style={{color:'whitesmoke'}}> in {pageCount} pages </Text>) : null }
 
 
 
@@ -97,10 +96,8 @@ return(
 
 
 
-{
 
-    !!paginationArray?.length ?
-(<View>
+
 
 <FlatList 
 
@@ -110,28 +107,23 @@ renderItem ={renderPaginationItem}
 contentContainerStyle={styles.resultContainer}
 />
 
-</View>)
-:
-null
-}
+
 
 
 
 
 <ScrollView showsHorizontalScrollIndicator={true} style={{ width:'100%', marginTop: '20px'}}>
 
-{ !!meals?.length ?
-(<View>
+
+
 <FlatList
 data={paginatedMeals}
 keyExtractor={(item,index) => index.toString()}
 renderItem = {renderMealItem}
 contentContainerStyle={styles.resultContainer}
 />
-</View>)
- : 
-null
-}
+
+
   
 </ScrollView>
 </SafeAreaView>
@@ -149,7 +141,7 @@ mealText:{color:'whitesmoke', fontWeight:'bold', fontSize:'16px', marginTop:'5px
 mealPhoto:{width:'100px', height:'100px'},
 currentPageText:{backgroundColor: 'whitesmoke', color:'green', margin:'5px'},
 pageText: {backgroundColor: 'green', color:'whitesmoke', margin:'5px'},
-resultContainer:{verticalSpace: '20',alignItems:'center', justifyContent: 'space-evenly',flexDirection: 'row', flexWrap: 'wrap'},
+resultContainer:{marginVertical:'10',alignItems:'center', justifyContent: 'space-evenly',flexDirection: 'row', flexWrap: 'wrap'},
 cardContainer:{alignItems:'center', justifyContent: 'space-around',flexDirection: 'row', flexWrap: 'wrap'}
 
 })

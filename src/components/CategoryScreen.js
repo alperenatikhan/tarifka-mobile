@@ -22,9 +22,9 @@ return(null)
   <TouchableOpacity style={{border: '1px solid #1ed760',width:'120px', flexDirection:'column',
    height:'100px',alignItems:'center',justifyContent:'center', marginBottom:'12px', 
    marginLeft:'6px',borderRadius:'14px'}} 
-   onPress = {()=> navigation.navigate('Meals', {title: item.strCategory} )}>  
-   <GiveIcons category={item.strCategory}/>
-    <Text style={styles.categoryText}>{item.strCategory}</Text> 
+   onPress = {()=> navigation.navigate('Meals', {title: item?.strCategory} )}>  
+   <GiveIcons category={item?.strCategory}/>
+    <Text style={styles.categoryText}>{item?.strCategory}</Text> 
     </TouchableOpacity> 
     )}
   }
@@ -46,7 +46,7 @@ useEffect(()=> {fetchData() }  ,[])
     <SafeAreaView style={styles.pageWrapper}>
      
       <ScrollView style={{flex:'1', margin:'5%'}}>
-{!!data?.length ?
+
 <FlatList    
 data={data}
 keyExtractor ={(item,index) => index.toString()}
@@ -55,9 +55,7 @@ contentContainerStyle={{alignItems:'center',
     flexDirection: 'row',
     flexWrap: 'wrap'}}
 renderItem ={ renderCategoryItem}
-/>:
-null
-}
+/>
 </ScrollView>
     </SafeAreaView>
   );

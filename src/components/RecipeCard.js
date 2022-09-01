@@ -46,12 +46,13 @@ return(
 <TouchableOpacity onPress={()=> handlePressButtonAsync(data.strYoutube)}><Text style={styles.youtubeButton}> Watch in Youtube  </Text></TouchableOpacity> 
 </View>
 
-
-{menuOpen=='ingredient' ? <View style={styles.cardBackground}> {!!ingredients?.length ? <FlatList data={ingredients} renderItem={renderIngredientCard} keyExtractor= {(item,index)=> index.toString()} /> :null } </View>:
-menuOpen=='recipe' ? <View style={styles.cardBackground}> <IngredientCard key={1} isIngredient={false} data={data?.strInstructions}/>  </View>
+<View style={styles.cardBackground}>
+{menuOpen=='ingredient' ? (<FlatList data={ingredients} renderItem={renderIngredientCard} keyExtractor= {(item,index)=> index.toString()} />) :
+menuOpen=='recipe' ? (<IngredientCard key={1} isIngredient={false} data={data?.strInstructions}/> )
 :null
 }
 
+</View>
 
 </View>
 
