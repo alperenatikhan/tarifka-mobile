@@ -5,7 +5,7 @@ import IngredientCard from './IngredientCard'
 import globalStyles from '../../styles/globalStyles.js'
 
 
-export default function RecipeCard({data, ingredients}) {
+export default function RecipeCard({data, ingredients, imageLink}) {
 
 const [menuOpen,setMenuOpen]= useState(false)
 let [result,setResult] = useState(null)
@@ -38,7 +38,7 @@ return(
 <View style={styles.pageWrapper}>
 
     <View style={{backgroundColor:'#1db954',flex:'1', width:'90vw', minWidth:'250px', maxWidth:'500px'}}>
-        <Image source={{uri:data.strMealThumb}} style={{width:'100%', height:'250px' }}   />
+         <Image source={{uri: imageLink }} style={{width:'100%', height:'250px' }} />
 
 <View style={{flexDirection:'row', marginTop:'10px', gap:'20px', justifyContent:'space-around', flexWrap:'wrap', paddingBottom:'20px'}}>
 <TouchableOpacity style = {globalStyles.buttonDesign} onPress={()=> handleMenu('ingredient')} ><Text style={globalStyles.midButton}> Ingredients  </Text></TouchableOpacity>
@@ -48,7 +48,7 @@ return(
 
 <View style={styles.cardBackground}>
 {menuOpen=='ingredient' ? (<FlatList data={ingredients} renderItem={renderIngredientCard} keyExtractor= {(item,index)=> index.toString()} />) :
-menuOpen=='recipe' ? (<IngredientCard key={1} isIngredient={false} data={data?.strInstructions}/> )
+menuOpen=='recipe' ? (<IngredientCard key={1} isIngredient={false} data={data.strInstructions}/> )
 :null
 }
 
